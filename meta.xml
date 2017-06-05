@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 1999-2017. Plesk International GmbH. -->
+<module>
+    <id>welcome-wp</id>
+    <name>Welcome - WordPress Server</name>
+    <description>This extension helps you to get started with your new Plesk WordPress Server!</description>
+    <category>help</category>
+    <version>1.0.0</version>
+    <release>9</release>
+    <vendor>Plesk</vendor>
+    <plesk_min_version>17.5</plesk_min_version>
+</module>

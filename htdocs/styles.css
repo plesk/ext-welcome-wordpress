@@ -1,0 +1,164 @@
+.welcome-container {
+    display: inline-block;
+    width: 100%;
+    margin: -28px 14px -10px -32px;
+    padding: 20px;
+    background-color: #fafafa !important;
+    font-size: 120%;
+    border: 1px solid #dedede;
+}
+
+span.close-button img {
+    float: right;
+    clear: both;
+}
+
+.welcome-container h2, .welcome-container h3 {
+    font-weight: bold;
+}
+
+.welcome-title {
+    margin-bottom: 30px;
+}
+
+.welcome-introtext {
+    width: 100%;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.welcome-message {
+    display: inline-block;
+    width: 100%;
+}
+
+.welcome-image-float {
+    float: left;
+    clear: both;
+    text-align: center;
+    width: 48%;
+    margin-right: 20px;
+}
+
+.welcome-image-float img {
+    width: 100%
+}
+
+.welcome-text {
+    width: 40%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 300px;
+}
+
+.welcome-description {
+    font-size: 100%;
+}
+
+.welcome-inactive, .welcome-inactive h3 {
+    color: darkgrey;
+}
+
+.welcome-active, .welcome-inactive.todo, .welcome-inactive.complete {
+    clear: both;
+    display: block;
+    margin: 30px auto 40px;
+    width: 80%;
+}
+
+.welcome-container div:last-child {
+    margin-bottom: 0;
+}
+
+.welcome-inactive.complete, .welcome-inactive.complete h3 {
+    color: #8fa08e;
+}
+
+.welcome-step-container {
+    margin-left: 80px;
+}
+
+span.icon-complete, span.icon-active, span.icon-todo {
+    display: inline;
+}
+
+span.icon-active:before, span.icon-todo:before, span.icon-complete:before {
+    background-color: #fafafa;
+    float: left;
+    margin: 0 10px 0 -6px;
+    padding: 5px 0;
+}
+
+span.icon-todo:before {
+    opacity: 0.4;
+}
+
+.icon-domain:before {
+    content: url("/modules/welcome-wp/images/domain-icon.png");
+}
+
+.icon-wptk:before {
+    content: url("/modules/welcome-wp/images/wptk-icon.png");
+}
+
+.icon-complete.icon-wptk:before {
+    content: url("/modules/welcome-wp/images/wptk-complete-icon.png");
+}
+
+.icon-security-advisor:before {
+    content: url("/modules/welcome-wp/images/security-advisor-icon.png");
+}
+
+.icon-complete.icon-security-advisor:before {
+    content: url("/modules/welcome-wp/images/security-advisor-complete-icon.png");
+}
+
+.icon-pagespeed-insights:before {
+    content: url("/modules/welcome-wp/images/pagespeed-insights-icon.png");
+}
+
+.icon-complete.icon-pagespeed-insights:before {
+    content: url("/modules/welcome-wp/images/pagespeed-insights-complete-icon.png");
+}
+
+.icon-complete:before  {
+    content: url("/modules/welcome-wp/images/complete-icon.png");
+}
+
+.welcome-done {
+    margin-top: 50px;
+}
+
+.welcome-inactive.welcome-done, .welcome-inactive.welcome-done h3 {
+    color: #4bc076;
+}
+
+.welcome-container div.control {
+    text-align: center;
+}
+
+.welcome-container div.control p {
+    margin-top: 20px;
+}
+
+@media (max-width: 1240px) {
+    .welcome-text {
+        width: 100%;
+        margin: auto;
+        display: inline;
+    }
+}
+
+@media (max-width: 630px) {
+    .welcome-image-float {
+        width: 100%;
+    }
+}
+
+@media (min-width: 1350px) {
+    .welcome-image-float img {
+        width: auto;
+    }
+}
