@@ -1,7 +1,5 @@
 <?php
-/**
- * Copyright 1999-2017. Plesk International GmbH.
- */
+// Copyright 1999-2018. Plesk International GmbH. All rights reserved.
 
 /**
  * Class Modules_WelcomeWp_ContentInclude
@@ -17,7 +15,7 @@ class Modules_WelcomeWp_ContentInclude extends pm_Hook_ContentInclude
 
                 if (!empty($status)) {
                     $head = new Zend_View_Helper_HeadLink();
-                    $head->headLink()->appendStylesheet(pm_Context::getBaseUrl().'styles.css');
+                    $head->headLink()->appendStylesheet(pm_Context::getBaseUrl() . 'styles.css');
 
                     $page_loaded = $_SERVER['REQUEST_URI'];
                     $white_list = Modules_WelcomeWp_Helper::getWhiteListPages();
@@ -33,7 +31,7 @@ class Modules_WelcomeWp_ContentInclude extends pm_Hook_ContentInclude
                             $content = pm_Locale::lmsg('message_introtext', [
                                 'close'      => '/modules/welcome-wp/images/close.png',
                                 'close_link' => pm_Context::getActionUrl('index', 'deactivate'),
-                                'elvis'      => '/modules/welcome-wp/images/plesk_octopus_wp'.mt_rand(1, 2).'.png',
+                                'elvis'      => '/modules/welcome-wp/images/plesk_octopus_wp' . mt_rand(1, 2) . '.png',
                                 'name'       => $client_name
                             ]);
 
@@ -55,7 +53,7 @@ class Modules_WelcomeWp_ContentInclude extends pm_Hook_ContentInclude
                                         } else {
                                             $content .= pm_Locale::lmsg('message_step_install_new', [
                                                 'link_install'          => pm_Context::getActionUrl('index', 'redirect-custom-wp-install'),
-                                                'link_install_migrator' => pm_Context::getActionUrl('index', 'install').'?extension=panel-migrator'
+                                                'link_install_migrator' => pm_Context::getActionUrl('index', 'install') . '?extension=panel-migrator'
                                             ]);
                                         }
                                     } else {
@@ -93,7 +91,7 @@ class Modules_WelcomeWp_ContentInclude extends pm_Hook_ContentInclude
                                         ]);
                                     } else {
                                         $content .= pm_Locale::lmsg('message_step_ssl_not', [
-                                            'link_install' => pm_Context::getActionUrl('index', 'install').'?extension=security-advisor'
+                                            'link_install' => pm_Context::getActionUrl('index', 'install') . '?extension=security-advisor'
                                         ]);
                                     }
 
@@ -126,7 +124,7 @@ class Modules_WelcomeWp_ContentInclude extends pm_Hook_ContentInclude
                                         ]);
                                     } else {
                                         $content .= pm_Locale::lmsg('message_step_pagespeed_not', [
-                                            'link_install' => pm_Context::getActionUrl('index', 'install').'?extension=pagespeed-insights'
+                                            'link_install' => pm_Context::getActionUrl('index', 'install') . '?extension=pagespeed-insights'
                                         ]);
                                     }
 

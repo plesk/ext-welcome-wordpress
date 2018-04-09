@@ -1,7 +1,5 @@
 <?php
-/**
- * Copyright 1999-2017. Parallels IP Holdings GmbH.
- */
+// Copyright 1999-2018. Plesk International GmbH. All rights reserved.
 
 /**
  * Class Modules_WelcomeWpo_Helper
@@ -23,7 +21,7 @@ class Modules_WelcomeWp_Helper
             $white_list = self::getWhiteListPages();
 
             foreach ($white_list as $item) {
-                if ($url_global_generic.$item == $url_global_return) {
+                if ($url_global_generic . $item == $url_global_return) {
                     return $url_global_return;
                 }
             }
@@ -42,7 +40,7 @@ class Modules_WelcomeWp_Helper
         $server_scheme = self::getServerScheme();
         $server_host = self::getServerHost();
 
-        return htmlspecialchars($server_scheme.'://'.$server_host);
+        return htmlspecialchars($server_scheme . '://' . $server_host);
     }
 
     /**
@@ -75,10 +73,10 @@ class Modules_WelcomeWp_Helper
         }
 
         if (pm_ProductInfo::isWindows()) {
-            return $_SERVER['LOCAL_ADDR'].':'.$_SERVER['SERVER_PORT'];
+            return $_SERVER['LOCAL_ADDR'] . ':' . $_SERVER['SERVER_PORT'];
         }
 
-        return $_SERVER['SERVER_ADDR'].':'.$_SERVER['SERVER_PORT'];
+        return $_SERVER['SERVER_ADDR'] . ':' . $_SERVER['SERVER_PORT'];
     }
 
     /**
@@ -107,7 +105,7 @@ class Modules_WelcomeWp_Helper
      */
     public static function isInstalled($name)
     {
-        return file_exists(dirname(pm_Context::getPlibDir()).'/'.$name);
+        return file_exists(dirname(pm_Context::getPlibDir()) . '/' . $name);
     }
 
     /**
@@ -122,7 +120,7 @@ class Modules_WelcomeWp_Helper
         $catalog_id = self::getExtensionCatalogId($name);
 
         if (!empty($catalog_id)) {
-            return '/admin/extension/catalog/package/'.$catalog_id;
+            return '/admin/extension/catalog/package/' . $catalog_id;
         }
 
         return '/admin/extension/catalog';
@@ -168,7 +166,7 @@ class Modules_WelcomeWp_Helper
         $catalog_id = self::getExtensionCatalogId($id);
 
         if (!empty($catalog_id)) {
-            $url = 'https://ext.plesk.com/packages/'.$catalog_id.'-'.$id.'/download';
+            $url = 'https://ext.plesk.com/packages/' . $catalog_id . '-' . $id . '/download';
 
             try {
                 self::installExtensionApi($url);
