@@ -90,7 +90,7 @@ class Modules_WelcomeWp_Helper
             '/admin/',
             '/admin/home?context=home',
             '/smb/',
-            '/smb/web/view'
+            '/smb/web/view',
         );
 
         return $white_list;
@@ -138,9 +138,10 @@ class Modules_WelcomeWp_Helper
     {
         $catalog_ids = array(
             'wp-toolkit'         => '00d002a7-3252-4996-8a08-aa1c89cf29f7',
-            'panel-migrator'     => 'bebc4866-d171-45fb-91a6-4b139b8c9a1b',
+            'site-import'        => '01878006-3c3e-4ed6-a7df-37e3741708a2',
             'security-advisor'   => '6bcc01cf-d7bb-4e6a-9db8-dd1826dcad8f',
-            'pagespeed-insights' => '3d2639e6-64a9-43fe-a990-c873b6b3ec66'
+            'pagespeed-insights' => '3d2639e6-64a9-43fe-a990-c873b6b3ec66',
+            'advisor'            => 'bbf16bc7-094e-4cb3-8b9c-32066fc66561',
         );
 
         if (!empty($catalog_ids[$id])) {
@@ -201,11 +202,12 @@ class Modules_WelcomeWp_Helper
      * Checks whether at least one domain is activated in the subscription
      *
      * @return bool
+     * @throws pm_Exception
      */
     public static function checkAvailableDomains()
     {
         $xml_data = new SimpleXMLElement('<packet><server><get><stat/></get></server></packet>');
-        $xml = \pm_ApiRpc::getService()->call($xml_data->children()[0]->asXml());
+        $xml = pm_ApiRpc::getService()->call($xml_data->children()[0]->asXml());
 
         if ($xml->xpath('//objects')[0]->domains == 0) {
             return false;
@@ -218,6 +220,7 @@ class Modules_WelcomeWp_Helper
      * Returns the next step depending on the OS
      *
      * @return int|null|string
+     * @throws pm_Exception
      */
     public static function getNextStep()
     {
@@ -243,6 +246,7 @@ class Modules_WelcomeWp_Helper
      * Creates a white list of allowed steps depending on the OS
      *
      * @return array
+     * @throws pm_Exception
      */
     public static function stepListOs()
     {
@@ -250,15 +254,15 @@ class Modules_WelcomeWp_Helper
             return array(
                 '1' => 'wp-toolkit',
                 '3' => 'pagespeed-insights',
-                '4' => 'restart'
+                '4' => 'restart',
             );
         }
 
         return array(
             '1' => 'wp-toolkit',
-            '2' => 'security-advisor',
+            '2' => self::getAdvisorData(),
             '3' => 'pagespeed-insights',
-            '4' => 'restart'
+            '4' => 'restart',
         );
     }
 
@@ -276,6 +280,55 @@ class Modules_WelcomeWp_Helper
         }
 
         if (time() - $executed >= 3) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Gets the correct link to the new domain creation page
+     *
+     * @return string
+     * @throws pm_Exception
+     */
+    public static function getAdvisorData($element = 'id')
+    {
+        $advisorExtension = ['name' => 'Security Advisor', 'id' => 'security-advisor'];
+
+        if (self::isPleskVersion178()) {
+            $advisorExtension = ['name' => 'Advisor', 'id' => 'advisor'];
+        }
+
+        return $advisorExtension[$element];
+    }
+
+    /**
+     * Gets the correct link to the new domain creation page
+     *
+     * @return string
+     * @throws pm_Exception
+     */
+    public static function getLinkNewDomain()
+    {
+        if (self::isPleskVersion178()) {
+            return '/smb/web/add-domain';
+        }
+
+        return '/admin/subscription/create';
+    }
+
+    /**
+     * Checks whether Plesk version is >= 17.8.10
+     *
+     * @return bool
+     * @throws pm_Exception
+     */
+    private static function isPleskVersion178()
+    {
+        $pleskVersion = pm_ProductInfo::getVersion();
+
+        if (version_compare($pleskVersion, '17.8.10', 'ge')) {
             return true;
         }
 

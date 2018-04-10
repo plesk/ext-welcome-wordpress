@@ -5,8 +5,8 @@
     <name>Welcome - WordPress Server</name>
     <description>This extension helps you to get started with your new Plesk WordPress Server!</description>
     <category>help</category>
-    <version>1.0.1</version>
-    <release>10</release>
+    <version>1.0.2</version>
+    <release>11</release>
     <vendor>Plesk</vendor>
     <plesk_min_version>17.5</plesk_min_version>
 </module>

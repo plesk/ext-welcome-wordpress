@@ -9,7 +9,6 @@ class Modules_WelcomeWp_ContentInclude extends pm_Hook_ContentInclude
     public function init()
     {
         if (pm_Session::isExist()) {
-
             if (pm_Session::getClient()->isAdmin()) {
                 $status = pm_Settings::get('active', 1);
 
@@ -37,7 +36,7 @@ class Modules_WelcomeWp_ContentInclude extends pm_Hook_ContentInclude
 
                             if (Modules_WelcomeWp_Helper::checkAvailableDomains() == false) {
                                 $content .= pm_Locale::lmsg('message_step_domain', [
-                                    'link_domain' => '/admin/subscription/create'
+                                    'link_domain' => Modules_WelcomeWp_Helper::getLinkNewDomain()
                                 ]);
                             } else {
                                 $white_list_os = Modules_WelcomeWp_Helper::stepListOs();
@@ -45,15 +44,15 @@ class Modules_WelcomeWp_ContentInclude extends pm_Hook_ContentInclude
 
                                 if ($step == 1) {
                                     if (Modules_WelcomeWp_Helper::isInstalled('wp-toolkit')) {
-                                        if (Modules_WelcomeWp_Helper::isInstalled('panel-migrator')) {
+                                        if (Modules_WelcomeWp_Helper::isInstalled('site-import')) {
                                             $content .= pm_Locale::lmsg('message_step_install_full', [
                                                 'link_install' => pm_Context::getActionUrl('index', 'redirect-custom-wp-install'),
-                                                'link_migrate' => '/modules/panel-migrator/index.php/site-migration/new-migration'
+                                                'link_migrate' => '/modules/site-import/index.php/site-migration/new-migration'
                                             ]);
                                         } else {
                                             $content .= pm_Locale::lmsg('message_step_install_new', [
-                                                'link_install'          => pm_Context::getActionUrl('index', 'redirect-custom-wp-install'),
-                                                'link_install_migrator' => pm_Context::getActionUrl('index', 'install') . '?extension=panel-migrator'
+                                                'link_install'             => pm_Context::getActionUrl('index', 'redirect-custom-wp-install'),
+                                                'link_install_site_import' => pm_Context::getActionUrl('index', 'install') . '?extension=site-import'
                                             ]);
                                         }
                                     } else {
@@ -62,9 +61,10 @@ class Modules_WelcomeWp_ContentInclude extends pm_Hook_ContentInclude
                                         ]);
                                     }
 
-                                    if (in_array('security-advisor', $white_list_os)) {
+                                    if (in_array(Modules_WelcomeWp_Helper::getAdvisorData(), $white_list_os)) {
                                         $content .= pm_Locale::lmsg('message_step_ssl_inactive', [
-                                            'class' => 'todo'
+                                            'class'             => 'todo',
+                                            'link_advisor_name' => Modules_WelcomeWp_Helper::getAdvisorData('name')
                                         ]);
                                     }
 
@@ -85,13 +85,15 @@ class Modules_WelcomeWp_ContentInclude extends pm_Hook_ContentInclude
                                         ]);
                                     }
 
-                                    if (Modules_WelcomeWp_Helper::isInstalled('security-advisor')) {
+                                    if (Modules_WelcomeWp_Helper::isInstalled(Modules_WelcomeWp_Helper::getAdvisorData())) {
                                         $content .= pm_Locale::lmsg('message_step_ssl', [
-                                            'link_security' => '/modules/security-advisor/'
+                                            'link_security'     => '/modules/' . Modules_WelcomeWp_Helper::getAdvisorData() . '/',
+                                            'link_advisor_name' => Modules_WelcomeWp_Helper::getAdvisorData('name')
                                         ]);
                                     } else {
                                         $content .= pm_Locale::lmsg('message_step_ssl_not', [
-                                            'link_install' => pm_Context::getActionUrl('index', 'install') . '?extension=security-advisor'
+                                            'link_install'      => pm_Context::getActionUrl('index', 'install') . '?extension=' . Modules_WelcomeWp_Helper::getAdvisorData(),
+                                            'link_advisor_name' => Modules_WelcomeWp_Helper::getAdvisorData('name')
                                         ]);
                                     }
 
@@ -112,9 +114,10 @@ class Modules_WelcomeWp_ContentInclude extends pm_Hook_ContentInclude
                                         ]);
                                     }
 
-                                    if (in_array('security-advisor', $white_list_os)) {
+                                    if (in_array(Modules_WelcomeWp_Helper::getAdvisorData(), $white_list_os)) {
                                         $content .= pm_Locale::lmsg('message_step_ssl_inactive', [
-                                            'class' => 'complete'
+                                            'class'             => 'complete',
+                                            'link_advisor_name' => Modules_WelcomeWp_Helper::getAdvisorData('name')
                                         ]);
                                     }
 
