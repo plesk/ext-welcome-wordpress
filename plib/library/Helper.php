@@ -1,5 +1,5 @@
 <?php
-// Copyright 1999-2018. Plesk International GmbH. All rights reserved.
+// Copyright 1999-2018. Plesk International GmbH.
 
 /**
  * Class Modules_WelcomeWpo_Helper
